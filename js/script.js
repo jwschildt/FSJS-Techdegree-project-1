@@ -46,14 +46,27 @@ const quotes = [
 /***
  * `getRandomQuote` function
 ***/
-//function getRandomQuote()
+let randomNumber;
+let htmlString;
 
+function getRandomQuote() {
+  randomNumber = Math.floor(Math.random()*quotes.length);
+  return quotes[randomNumber];
+}
 
 /***
  * `printQuote` function
 ***/
+function printQuote() {
+  const randomQuoteObject = getRandomQuote();
+  let htmlString = `
+  <p>"${quotes[randomNumber].quote}"</p>
 
-
+  <p>${quotes[randomNumber].source}, ${quotes[randomNumber].citation}, ${quotes[randomNumber].year}</p>
+  `
+  return htmlString;
+}
+document.getElementById('quote-box').innerHTML = printQuote();
 
 /***
  * click event listener for the print quote button

@@ -11,17 +11,16 @@ project 1 - A Random Quote Generator
  * `quotes` array
 ***/
 const quotes = [
-  {
+{
   quote: 'You know as well as I do that fear only exists for one purpose... to be conquered.',
   source: 'Captain Katherine Janeway',
   citation: 'Star Trek: Voyager',
-  year: '1996'
 },
 {
-  quote: "There is a way out of every box, a solution to every puzzle; it's just a matter of finding it.",
+  quote: 'There is a way out of every box, a solution to every puzzle; it\'s just a matter of finding it.',
   source: 'Captain Jean-Luc Picard',
   citation: 'Star Trek: The Next Generation',
-  year: '1993, 47304.2'
+  year: '47304.2'
 },
 {
   quote: 'Of course it is happening inside your head, Harry, but why on earth should that mean it is not real?',
@@ -36,7 +35,7 @@ const quotes = [
   year: '2003'
 },
 {
-  quote: "I solemnly swear I am up to no good.",
+  quote: 'I solemnly swear I am up to no good.',
   source: 'Harry Potter',
   citation: 'Harry Potter and the Prisoner of Azkaban',
   year: '2004'
@@ -45,28 +44,40 @@ const quotes = [
 
 /***
  * `getRandomQuote` function
+
+ * getRandomQuote() returns a random object from the quotes array.
+ * randomNumber generates a random number up to the length of the quotes array.
+ * returns a random quote object.
 ***/
-let randomNumber;
-let htmlString;
+
 
 function getRandomQuote() {
-  randomNumber = Math.floor(Math.random()*quotes.length);
+  const randomNumber = Math.floor(Math.random()*quotes.length);
   return quotes[randomNumber];
 }
 
 /***
  * `printQuote` function
-***/
-function printQuote() {
-  const randomQuoteObject = getRandomQuote();
-  let htmlString = `
-  <p>"${quotes[randomNumber].quote}"</p>
 
-  <p>${quotes[randomNumber].source}, ${quotes[randomNumber].citation}, ${quotes[randomNumber].year}</p>
-  `
-  return htmlString;
+ * printQuote() returns an HTML string based on the quote object's properties.
+ * quoteObject calls getRandomQuote() and returns a quote object.
+ * htmlString contains the HTML string base including the quote and source      properties.
+* The 2 if statements add additional properties to htmlString if they are applicable.
+* returns complete htmlString and inserts it into the HTML.
+***/
+
+function printQuote() {
+  quoteObject = getRandomQuote();
+  let htmlString = '<p class="quote">' + quoteObject.quote + '</p>' + '<p class="source">' + quoteObject.source;
+  if (quoteObject.citation) {
+    htmlString = htmlString + '<span class="citation">' + quoteObject.citation + '</span>';
+  }
+  if (quoteObject.year) {
+    htmlString = htmlString + '<span class="year">' + quoteObject.year + '</span>';
+  }
+  return document.getElementById('quote-box').innerHTML = htmlString + '</p>' ;
 }
-document.getElementById('quote-box').innerHTML = printQuote();
+
 
 /***
  * click event listener for the print quote button
